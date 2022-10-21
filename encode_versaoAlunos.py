@@ -34,7 +34,6 @@ def build_tone(tecla,t):
 
 
 
-
 def main():
     
    
@@ -55,7 +54,8 @@ def main():
     while NUM not in freqs.keys():
         NUM=input('Digite uma tecla válida: ')
         
-    tone = build_tone(NUM,1)
+    tone = build_tone(NUM,1) # 1 segundo
+    
     
     
 
@@ -65,12 +65,15 @@ def main():
     print("Executando as senoides (emitindo o som)")
     print("Gerando Tom referente ao símbolo : {}".format(NUM))
     sd.play(tone, fs)
-    # Exibe gráficos
-    plt.show()
-    # aguarda fim do audio
-    sd.wait()
+    
     signal=signalMeu()
     signal.plotFFT(tone, fs)
+    plt.axis([0, 1500, 0, 13000])
+
+    # aguarda fim do audio
+    sd.wait()
+    # Exibe gráficos
+    plt.show()
     
 
 if __name__ == "__main__":
