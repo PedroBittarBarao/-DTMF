@@ -5,8 +5,9 @@ from suaBibSignal import *
 import numpy as np
 import sounddevice as sd
 import matplotlib.pyplot as plt
+import sys
 
-fs=44100
+fs=48000
 freqs={ '1':(697,1209),'2':(697,1336),'3':(697,1477),'A':(697,1633),
         '4':(770,1209),'5':(770,1336),'6':(770,1477),'B':(770,1633),
         '7':(852,1209),'8':(852,1336),'9':(852,1477),'C':(852,1633),
@@ -29,7 +30,7 @@ def build_senoide(freq,time_array):
 myFn = np.vectorize(build_senoide, excluded=['freq'])
 
 def build_tone(tecla,t):
-    time_array=np.linspace(0,t,(44100*t)+1)
+    time_array=np.linspace(0,t,(48000*t)+1)
     return myFn(freqs[tecla][0],time_array)+myFn(freqs[tecla][1],time_array)
 
 
@@ -54,7 +55,7 @@ def main():
     while NUM not in freqs.keys():
         NUM=input('Digite uma tecla válida: ')
         
-    tone = build_tone(NUM,1) # 1 segundo
+    tone = build_tone(NUM,5) # 1 segundo
     
     
     
