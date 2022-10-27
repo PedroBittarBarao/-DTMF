@@ -37,6 +37,7 @@ def main():
     time.sleep(3)
    
     #Ao seguir, faca um print informando que a gravacao foi inicializada
+    print('A captura foi inicializada')
 
     #para gravar, utilize
     audio = sd.rec(int(numAmostras), sd.default.samplerate, channels=1)
@@ -78,7 +79,7 @@ def main():
     print("index de picos {}" .format(index)) #yf é o resultado da transformada de fourier
 
     #printe os picos encontrados! 
-    print([xf[i] for i in index])
+    print(f'Picos encontrados :{[xf[i] for i in index]}')
     # Aqui você deverá tomar o seguinte cuidado: A funcao  peakutils.indexes retorna as POSICOES dos picos. Não os valores das frequências onde ocorrem! Pense a respeito
     
     #encontre na tabela duas frequencias proximas às frequencias de pico encontradas e descubra qual foi a tecla
@@ -110,7 +111,20 @@ def main():
             val_2 = (mini, opts[mini])
 
     #print o valor tecla!!!
-    print(val_1[1], val_2[1])
+    print(f'{val_1[1]}Hz ;{val_2[1]}Hz')
+    freqs_achadas=(val_1[1], val_2[1])
+    
+    freqs={ '1':(697,1209),'2':(697,1336),'3':(697,1477),'A':(697,1633),
+        '4':(770,1209),'5':(770,1336),'6':(770,1477),'B':(770,1633),
+        '7':(852,1209),'8':(852,1336),'9':(852,1477),'C':(852,1633),
+        'X':(941,1209),'0':(941,1336),'#':(941,1477),'D':(941,1633)}
+    
+    for k in freqs.keys():
+        if freqs_achadas==freqs[k]:
+            print(f'Tecla {k} foi pressionada')
+            break
+    
+    
     #Se acertou, parabens! Voce construiu um sistema DTMF
 
     #Você pode tentar também identificar a tecla de um telefone real! Basta gravar o som emitido pelo seu celular ao pressionar uma tecla. 
